@@ -15,7 +15,7 @@ class Status(Enum):
 
 
 class Device(models.Model):
-    device_id = models.SlugField(primary_key=True, db_index=True)
+    device_id = models.CharField(max_length=200, primary_key=True, db_index=True)
     status = models.CharField(max_length=20, choices=Status.choices(), default=Status.NOT_VIEWED.value)
     subscription_expires_date = models.DateField(default=None, null=True, blank=True)
     last_login_date = models.DateTimeField(auto_now=True)

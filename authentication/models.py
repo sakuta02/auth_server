@@ -1,5 +1,7 @@
-from django.db import models
+from datetime import date, timedelta
 from enum import Enum
+
+from django.db import models
 
 
 class Status(Enum):
@@ -15,5 +17,22 @@ class Status(Enum):
 class Device(models.Model):
     device_id = models.SlugField(primary_key=True, db_index=True)
     status = models.CharField(max_length=20, choices=Status.choices(), default=Status.NOT_VIEWED.value)
-    registration_date = models.DateTimeField(auto_now_add=True)
+    subscription_expires_date = models.DateField(default=None, null=True, blank=True)
     last_login_date = models.DateTimeField(auto_now=True)
+    registration_date = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_one_month_sub():
+        return date.today() + timedelta(days=30)
+
+    @staticmethod
+    def get_half_year_sub():
+        return date.today() + timedelta(days=30 * 6)
+
+    @staticmethod
+    def get_one_year_sub():
+        return date.today() + timedelta(days=30 * 12)
+
+    @staticmethod
+    def get_forever_sub():
+        return date.today() + timedelta(days=30 * 600)

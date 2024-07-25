@@ -1,10 +1,11 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from authentication.views import DeviceAuthView
+from rest_framework.routers import SimpleRouter
+from authentication.views import DeviceAuthView, HandleAuthView
 
-rt = DefaultRouter()
-rt.register('auth', DeviceAuthView, basename='auth')
+rt = SimpleRouter()
+rt.register('handle-devices', HandleAuthView, basename='handle-devices')
 
 urlpatterns = [
+    path('devices/<pk>', DeviceAuthView.as_view({'get': 'retrieve', 'post': 'create'}), name='auth'),
     path('', include(rt.urls))
 ]

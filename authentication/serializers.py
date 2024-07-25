@@ -13,7 +13,6 @@ class DeviceSerializer(ModelSerializer):
         representation = super().to_representation(instance)
         if not representation.get('subscription_expires_date'):
             representation.pop('subscription_expires_date')
-        representation['status'] = Status[instance.status].value
         return representation
 
 

@@ -19,5 +19,5 @@ class DeviceSerializer(ModelSerializer):
 class HandleDeviceSerializer(ModelSerializer):
     class Meta:
         model = Device
-        fields = ("device_id", "status", "subscription_expires_date", "registration_date", "last_login_date")
+        fields = ("device_id", "status", "subscription_expires_date", "registration_date", "last_login_date", "telegram_id")
         read_only_fields = ("registration_date", "last_login_date")

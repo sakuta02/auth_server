@@ -20,6 +20,7 @@ class Device(models.Model):
         choices=Status.choices(),
         default=Status.NOT_VIEWED.value
     )
+    telegram_id = models.CharField(max_length=200, null=True, blank=True)
     subscription_expires_date = models.DateField(null=True, blank=True)
     last_login_date = models.DateTimeField(auto_now=True)
     registration_date = models.DateTimeField(auto_now_add=True)

@@ -28,7 +28,7 @@ class HandleAuthView(GenericViewSet, ListModelMixin, RetrieveModelMixin, UpdateM
 
     @decorators.action(methods=['delete'], detail=False)
     def clear(self, request):
-        devices = list(Device.objects.filter(status=Status.NOT_VIEWED.value))
+        devices = list(Device.objects.filter(status__in=(Status.NOT_VIEWED.value, Status.DENIED.value)))
         count_devices = len(devices)
         for device in devices:
             device.delete()
